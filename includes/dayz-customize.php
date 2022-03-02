@@ -103,9 +103,9 @@ function dayz_add_custom_field_to_variations( $loop, $variation_data, $variation
 // -----------------------------------------
 // 2. Save custom field on product variation save
  
-add_action( 'woocommerce_save_product_variation', 'bbloomer_save_custom_field_variations', 10, 2 );
+add_action( 'woocommerce_save_product_variation', 'dayz_save_custom_field_variations', 10, 2 );
  
-function bbloomer_save_custom_field_variations( $variation_id, $i ) {
+function dayz_save_custom_field_variations( $variation_id, $i ) {
    $supplier_article_number = $_POST['supplier_article_number'][$i];
    if ( isset( $supplier_article_number ) ) update_post_meta( $variation_id, 'supplier_article_number', esc_attr( $supplier_article_number ) );
 
@@ -141,10 +141,10 @@ function speed_delivery_single_page() {
 
  //add to cart speed delivery start
  //** notice:  content-single-product.php add custom html for get data **//
-add_action('wp_ajax_wdm_add_user_custom_data_options', 'wdm_add_user_custom_data_options_callback');
-add_action('wp_ajax_nopriv_wdm_add_user_custom_data_options', 'wdm_add_user_custom_data_options_callback');
+add_action('wp_ajax_wdm_add_user_custom_data_options', 'dayz_add_user_custom_data_options_callback');
+add_action('wp_ajax_nopriv_wdm_add_user_custom_data_options', 'dayz_add_user_custom_data_options_callback');
 
-function wdm_add_user_custom_data_options_callback()
+function dayz_add_user_custom_data_options_callback()
 {
       //Custom data - Sent Via AJAX post method
       $product_id = $_POST['id']; //This is product ID
