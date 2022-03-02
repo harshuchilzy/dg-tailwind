@@ -1,6 +1,6 @@
 <?php /* Template Name: faq Page */
 get_header(); ?>
-<div class="faq-page-main" >
+<div class="faq-page-main dark:bg-black" >
     <div class="faq-secton-1 w-full inline-block py-16 bg-no-repeat bg-center bg-cover" style="background: url(<?php echo get_site_url(); ?>/wp-content/themes/tailpress/images/fs1-bg.png);">
         <div class="container mx-auto">
             <div class="fs1-detail w-2/3 inline-block">
