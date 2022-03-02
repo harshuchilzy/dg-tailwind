@@ -1,6 +1,8 @@
-<?php /* Template Name: Contact Page */
+<?php
+/* Template Name: Contact Page */
 get_header(); ?>
-<div class="contact-page-main w-full inline-block py-9">
+
+<div class="contact-page-main w-full inline-block py-9 dark:bg-black">
     <div class="contact-section-1">
         <div class="container mx-auto">
             <div class="flex gap-8">
