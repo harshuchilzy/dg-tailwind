@@ -154,11 +154,11 @@ function dayz_add_user_custom_data_options_callback()
       die();
 }
 
-add_filter('woocommerce_add_cart_item_data','wdm_add_item_data',1,2);
+add_filter('woocommerce_add_cart_item_data','dayz_add_item_data',1,2);
  
-if(!function_exists('wdm_add_item_data'))
+if(!function_exists('dayz_add_item_data'))
 {
-    function wdm_add_item_data($cart_item_data,$product_id)
+    function dayz_add_item_data($cart_item_data,$product_id)
     {
         /*Here, We are adding item in WooCommerce session with, wdm_user_custom_data_value name*/
         global $woocommerce;
