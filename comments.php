@@ -8,7 +8,7 @@ if ( post_password_required() ) {
 	return;
 }
 ?>
-
+Test
 <div id="comments" class="comments-area my-8">
 
 	<?php if ( have_comments() ) : ?>
