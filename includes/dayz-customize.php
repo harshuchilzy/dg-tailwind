@@ -28,9 +28,7 @@ function dayz_add_new_order_admin_list_column_content( $column , $order_id) {
 }
 
 /* Create b2b User Role */
-add_role(
-    'b2b', //  System name of the role.
-    __( 'B2B'  ), // Display name of the role.
+add_role( 'b2b', __( 'B2B'  ), // Display name of the role.
     array(
         'read'  => true,
         'delete_posts'  => true,
@@ -79,9 +77,9 @@ function minimum_buy_for_discount_single_page() {
 // -----------------------------------------
 // 1. Add custom field input @ Product Data > Variations > Single Variation
  
-add_action( 'woocommerce_variation_options_pricing', 'bbloomer_add_custom_field_to_variations', 10, 3 );
+add_action( 'woocommerce_variation_options_pricing', 'dayz_add_custom_field_to_variations', 10, 3 );
  
-function bbloomer_add_custom_field_to_variations( $loop, $variation_data, $variation ) {
+function dayz_add_custom_field_to_variations( $loop, $variation_data, $variation ) {
    woocommerce_wp_text_input( array(
     'id' => 'supplier_article_number[' . $loop . ']',
     'class' => 'short',
