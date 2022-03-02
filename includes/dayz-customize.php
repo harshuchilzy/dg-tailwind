@@ -1,15 +1,15 @@
 <?php
 
-add_filter( 'manage_edit-shop_order_columns', 'bbloomer_add_new_order_admin_list_column' );
+add_filter( 'manage_edit-shop_order_columns', 'dayz_add_new_order_admin_list_column' );
  
-function bbloomer_add_new_order_admin_list_column( $columns ) {
+function dayz_add_new_order_admin_list_column( $columns ) {
     $columns['good_of_cost'] = 'Good of Cost';
     return $columns;
 }
  
-add_action( 'manage_shop_order_posts_custom_column', 'bbloomer_add_new_order_admin_list_column_content' , 10 ,2);
+add_action( 'manage_shop_order_posts_custom_column', 'dayz_add_new_order_admin_list_column_content' , 10 ,2);
  
-function bbloomer_add_new_order_admin_list_column_content( $column , $order_id) {
+function dayz_add_new_order_admin_list_column_content( $column , $order_id) {
     if ( 'good_of_cost' === $column ) {
         // Iterating through each WC_Order_Item_Product objects
         $the_order = wc_get_order($order_id);
@@ -29,7 +29,7 @@ function bbloomer_add_new_order_admin_list_column_content( $column , $order_id) 
 
 /* Create b2b User Role */
 add_role(
-    'b_2_b', //  System name of the role.
+    'b2b', //  System name of the role.
     __( 'B2B'  ), // Display name of the role.
     array(
         'read'  => true,
@@ -48,7 +48,7 @@ add_role(
 function b2b_price_single_page() {
    global $product;
    $user = wp_get_current_user();
-   if ( in_array( 'b_2_b', $user->roles ) ) {
+   if ( in_array( 'b2b', $user->roles ) ) {
    $product_id = $product->get_id();
    $b2b_price = get_post_meta($product_id , 'b2b_price', true);
    echo 'dealer price :' ;
