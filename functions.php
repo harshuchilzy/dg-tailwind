@@ -41,8 +41,8 @@ add_action( 'after_setup_theme', 'tailpress_setup' );
 function tailpress_enqueue_scripts() {
 	$theme = wp_get_theme();
 
-	wp_enqueue_style( 'tailpress', tailpress_asset( 'css/app.css' ), array(), $theme->get( 'Version' ) );
-	wp_enqueue_script( 'tailpress', tailpress_asset( 'js/app.js' ), array(), $theme->get( 'Version' ) );
+	wp_enqueue_style( 'tailpress', get_stylesheet_directory_uri() . '/css/app.css', array(), $theme->get( 'Version' ) );
+	wp_enqueue_script( 'tailpress', get_stylesheet_directory_uri() . '/js/app.js' , array(), $theme->get( 'Version' ) );
 }
 
 add_action( 'wp_enqueue_scripts', 'tailpress_enqueue_scripts' );
