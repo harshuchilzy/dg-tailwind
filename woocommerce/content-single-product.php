@@ -65,29 +65,21 @@ if ( post_password_required() ) {
 		}
 		?>
 		<div class="featured-media-block <?php echo $class; ?>">
+
 			<div class="featured-product-slider11">
 				<?php 
 				global $product;
-// 				$columns           = apply_filters( 'woocommerce_product_thumbnails_columns', 4 );
-// 				$post_thumbnail_id = $product->get_image_id();
-// 				$wrapper_classes   = apply_filters(
-// 					'woocommerce_single_product_image_gallery_classes',
-// 					array(
-// 						'woocommerce-product-gallery',
-// 						'woocommerce-product-gallery--' . ( $post_thumbnail_id ? 'with-images' : 'without-images' ),
-// 						'woocommerce-product-gallery--columns-' . absint( $columns ),
-// 						'images',
-// 					)
-// 				);
-				$attachment_ids = $product->get_gallery_image_ids();
-				foreach( $attachment_ids as $attachment_id ) {
-					$image_link = wp_get_attachment_url( $attachment_id );
-					$thumbnail = '<div>      
-						<div class="product__media-item ">
-						<img src="'.$image_link.'" alt="">
-						</div>
-						</div>';
-				}
+				$columns           = apply_filters( 'woocommerce_product_thumbnails_columns', 4 );
+				$post_thumbnail_id = $product->get_image_id();
+				$wrapper_classes   = apply_filters(
+					'woocommerce_single_product_image_gallery_classes',
+					array(
+						'woocommerce-product-gallery',
+						'woocommerce-product-gallery--' . ( $post_thumbnail_id ? 'with-images' : 'without-images' ),
+						'woocommerce-product-gallery--columns-' . absint( $columns ),
+						'images',
+					)
+				);
 				?>
 				<div class="<?php echo esc_attr( implode( ' ', array_map( 'sanitize_html_class', $wrapper_classes ) ) ); ?>" data-columns="<?php echo esc_attr( $columns ); ?>" style="opacity: 0; transition: opacity .25s ease-in-out;">
 <!-- 					<span class="dashicons dashicons-arrow-left-alt nav_left"></span>
@@ -276,7 +268,7 @@ if ( post_password_required() ) {
             <div class="tab">
                 <button class="tablinks active" onclick="openCity(event, 'tab-1')">DESCRIPTION</button>
                 <button class="tablinks" onclick="openCity(event, 'tab-2')">PRODUCT DETAILS</button>
-                <button class="tablinks" onclick="openCity(event, 'tab-3')">REVIEWS (2)</button>
+                <button class="tablinks" onclick="openCity(event, 'tab-3')">REVIEWS (<?php echo $count = $product->get_review_count();?>)</button>
             </div>
             <div id="tab-1" class="tabcontent" style="display: block;">
                 <div class="pdt-block flex gap-8 py-12 items-center">
@@ -565,27 +557,24 @@ if ( post_password_required() ) {
                 </div>
                 <div class="w-1/2">
                     <div class="product-specification-image">
-                        <img src="<?php echo get_field('specification_image') ?>" alt="">
+						<?php
+						global $product;
+// 								 $id = get_queried_object_id();
+// 								 $product = $id;
+					
+								 $attachment_ids = $product->get_gallery_image_ids();
+								 $attachment_id = $attachment_ids[0];
+								  $thumbnail = wp_get_attachment_image( $attachment_id );
+						?>
+                        <?php echo $thumbnail; ?>
                     </div>
                 </div>
             </div>
           </div>
     </div>
     </div>
-<style type="text/css">
-	.nav_left{
-		position: absolute;
-		left: 115px;
-		z-index: 99;
-		top: 250px;
-	}
-	.nav_right{
-		position: absolute;
-		left: 575px;
-		z-index: 99;
-		top: 250px;
-	}
+<style>
+	.product-template-default div#comments {
+    display: none;
+}
 </style>
-<script type="text/javascript">
-	let 
-</script>

@@ -41,7 +41,7 @@
 							<li><a href="#">Blog</a></li>
 							<li><a href="#">Algemene voorwaarden</a></li>
 							<li><a href="#">Garantie en klachten</a></li>
-							<li><a href="#">Contact</a></li>
+							<li><a href="/contact/">Contact</a></li>
 							<li><a href="#">Retourneren</a></li>
 							<li><a href="#">Privacy Policy</a></li>
 						</ul>
@@ -100,6 +100,12 @@
     });
     $('body').on('click', '.woocommerce-pagination li a', function(){
     window.location.href = $(this).attr('href'); 
+    });
+    $('body').on('click', 'a[href="/cart"]', function(event){
+     event.preventDefault()
+     $(".xoo-wsc-modal").addClass('xoo-wsc-cart-active');
+     $("html").addClass('xoo-wsc-cart-active');
+     $("body").addClass('xoo-wsc-cart-active');
     });
     });
 </script>

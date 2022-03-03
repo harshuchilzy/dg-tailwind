@@ -1,6 +1,6 @@
 <?php /* Template Name: faq Page */
 get_header(); ?>
-<div class="faq-page-main dark:bg-black" >
+<div class="faq-page-main" >
     <div class="faq-secton-1 w-full inline-block py-16 bg-no-repeat bg-center bg-cover" style="background: url(<?php echo get_site_url(); ?>/wp-content/themes/tailpress/images/fs1-bg.png);">
         <div class="container mx-auto">
             <div class="fs1-detail w-2/3 inline-block">
@@ -18,15 +18,24 @@ get_header(); ?>
     <div class="faq-section-2 w-full inline-block py-16">
         <div class="container mx-auto">
             <div class="grid grid-cols-5 grid-flow-row gap-8">
+				<?php  
+			             $terms = get_terms( array(
+                                    'taxonomy' => 'knowledge-base-category',
+                                    'hide_empty' => false,
+                                     ) );
+						 foreach($terms as $taxval){
+							$taxo_nmame = $taxval->name;
+						    $taxo_slug = $taxval->slug;
+							 		?>
                 <div class="flex gap-5 items-center">
                     <img src="<?php echo get_site_url(); ?>/wp-content/themes/tailpress/images/cloud.png"  alt="" width="50" height="50" class="w-10" >
                     <span>
-                        <h4 class="text-3b font-bold text-lg font-proxima">Lrem Ipsum</h4>
-                        <a href="#" class="text-3b font-light text-base font-proxima hover:text-orange-400">View section <span>&#8594;</span></a>
+                        <h4 class="text-3b font-bold text-lg font-proxima"><?php echo $taxo_nmame; ?></h4>
+                        <a href="<?=site_url(); ?>/knowledge-base-category/<?=$taxo_slug;?>" class="text-3b font-light text-base font-proxima hover:text-orange-400">View section <span>&#8594;</span></a>
                     </span>
                 </div>
-
-                <div class="flex gap-5 items-center">
+ <?php } ?>
+<!--                 <div class="flex gap-5 items-center">
                     <img src="<?php echo get_site_url(); ?>/wp-content/themes/tailpress/images/random-arrows.png"  alt="" width="50" height="50" class="w-10" >
                     <span>
                         <h4 class="text-3b font-bold text-lg font-proxima">Lrem Ipsum</h4>
@@ -153,7 +162,7 @@ get_header(); ?>
                         <a href="#" class="text-3b font-light text-base font-proxima hover:text-orange-400">View section <span>&#8594;</span></a>
                     </span>
                 </div>
-
+ -->
 
             </div>
         </div>
@@ -164,30 +173,46 @@ get_header(); ?>
             <div class="flex gap-7">
                 <div class="w-3/5">
                     <div class="grid grid-cols-2 grid-flow-row gap-7">
+						<?php  
+						 $knowledge_base = array(
+                                                  'post_type' => 'knowledge-base',
+                                                  'post_status' => 'publish',
+                                                  'orderby'=> 'title',
+									              'order' => 'ASC',
+                                                  'posts_per_page' => -1
+                                               );
+						$query = new WP_Query($knowledge_base);
+						if ( $query->have_posts() ) { 
+                              while ( $query->have_posts() ) { $query->the_post();  
+						 ?>
                         <div class="fs3-block rounded-2xl shadow shadow-gray-300 overflow-hidden">
                             <div class="fs3-image rounded-2xl shadow shadow-gray-300 overflow-hidden relative">
-                                <img src="<?php echo get_site_url(); ?>/wp-content/themes/tailpress/images/fs-1.png" alt="" width="300" height="200" class="h-56 w-full object-cover">
+                                <a href="<?php echo get_permalink(); ?>">
+								<img src="<?php echo get_the_post_thumbnail_url(); ?>" alt="" width="300" height="200" class="h-56 w-full object-cover"></a>
                                 
                             </div>
                             <div class="fs3-detail p-5">
                                <div class="flex gap-5">
                                     <div class="w-4/6">
-                                        <h3 class="text-black text-lg font-bold font-proxima">Lorem Ipsum</h3>
-                                        <p class="text-8a text-base font-normal font-proxima">Lorem Ipsum is simply dummy text</p>
+										<a href="<?php echo get_permalink(); ?>">
+											<h3 class="text-black text-lg font-bold font-proxima"><?php echo get_the_title();?></h3></a>
+                                        <p class="text-8a text-base font-normal font-proxima"><?php echo the_content(); ?></p>
                                     </div>
                                     <div class="w-1/3">
-                                        <span class="text-8a text-sm font-light font-proxima text-right w-full inline-block">23/10/2021</span>
+                                        <span class="text-8a text-sm font-light font-proxima text-right w-full inline-block"><?php echo get_the_date('d/m/Y'); ?></span>
                                     </div>
                                </div>
                                <div class="fs3-comment-like flex items-center justify-between mt-3">
-                                    <a href="#" class="fs3-comments flex items-center gap-3 text-8a font-normal font-proxima text-sm hover:text-orange-400"><img src="<?php echo get_site_url(); ?>/wp-content/themes/tailpress/images/chat.png" alt="" width="15" height="15"> (23) comments</a>
-                                    <a href="#" class="fs3-comments flex items-center gap-3 text-8a font-normal font-proxima text-sm hover:text-orange-400"><img src="<?php echo get_site_url(); ?>/wp-content/themes/tailpress/images/like.png" alt="" width="15" height="15"> (52) likes</a>
+                                    <a href="<?php echo get_permalink(); ?>" class="fs3-comments flex items-center gap-3 text-8a font-normal font-proxima text-sm hover:text-orange-400"><img src="<?php echo get_site_url(); ?>/wp-content/themes/tailpress/images/chat.png" alt="" width="15" height="15"> (<?php echo $post->comment_count; ?>) comments</a>
+								   <?php echo do_shortcode('[posts_like_dislike]');?>
+<!--                                     <a href="#" class="fs3-comments flex items-center gap-3 text-8a font-normal font-proxima text-sm hover:text-orange-400"><img src="<?php echo get_site_url(); ?>/wp-content/themes/tailpress/images/like.png" alt="" width="15" height="15"> (52) likes</a> -->
                                </div>
 
                             </div>
                         </div> 
-
-                        <div class="fs3-block rounded-2xl shadow shadow-gray-300 overflow-hidden">
+<?php 	  } }  ?>
+					
+<!--                         <div class="fs3-block rounded-2xl shadow shadow-gray-300 overflow-hidden">
                             <div class="fs3-image rounded-2xl shadow shadow-gray-300 overflow-hidden relative">
                                 <img src="<?php echo get_site_url(); ?>/wp-content/themes/tailpress/images/fs-2.png" alt="" width="300" height="200" class="h-56 w-full object-cover">
                                 
@@ -255,7 +280,7 @@ get_header(); ?>
 
                             </div>
                         </div> 
-                        
+                         -->
                         
                     </div>
                 </div>
@@ -263,7 +288,26 @@ get_header(); ?>
                     <div class="blog-sidebar w-full inline-block shadow shadow-gray-300 px-7 py-12 bg-white rounded-2xl">
                           <h2 class="font-proxima uppercase text-orange text-4xl text-center font-bold mb-9">FAQ's</h2>
                           <div class="sidebar-accordion">
+							  <?php
+							      $faq_blog = array(
+                                                  'post_type' => 'faq',
+                                                  'post_status' => 'publish',
+                                                  'orderby'=> 'title',
+									              'order' => 'ASC',
+                                                  'posts_per_page' => -1
+                                               );
+						$query = new WP_Query($faq_blog);
+						if ( $query->have_posts() ) { 
+                              while ( $query->have_posts() ) { $query->the_post();  
+						  ?>
                               <div class="sidebar-accordion-block"> 
+                                    <button class="accordion"><?php echo get_the_title(); ?></button>
+                                    <div class="panel">
+                                    <p<?php the_content(); ?></p>
+                                    </div>
+                               </div> 
+							  <?php }}  ?>
+<!--                                <div class="sidebar-accordion-block"> 
                                     <button class="accordion">Lorem Ipsum is simply dummy text</button>
                                     <div class="panel">
                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
@@ -328,13 +372,7 @@ get_header(); ?>
                                     <div class="panel">
                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                                     </div>
-                               </div> 
-                               <div class="sidebar-accordion-block"> 
-                                    <button class="accordion">Lorem Ipsum is simply dummy text</button>
-                                    <div class="panel">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                                    </div>
-                               </div> 
+                               </div>  -->
                           </div>
                           
                     </div>

@@ -1,8 +1,6 @@
-<?php
-/* Template Name: Contact Page */
+<?php /* Template Name: Contact Page */
 get_header(); ?>
-
-<div class="contact-page-main w-full inline-block py-9 dark:bg-black">
+<div class="contact-page-main w-full inline-block py-9">
     <div class="contact-section-1">
         <div class="container mx-auto">
             <div class="flex gap-8">
@@ -65,27 +63,31 @@ get_header(); ?>
 						     $pl = get_permalink( $blog );
 						     $dpl	= get_the_time('d/m/Y', $blog);
 						    $dlmage = wp_get_attachment_url( get_post_thumbnail_id($blog));
-							echo $content = get_post( $blog )->post_content;
-						  
 						?>
                         <div class="fs3-block rounded-2xl shadow shadow-gray-300 overflow-hidden">
                             <div class="fs3-image rounded-2xl shadow shadow-gray-300 overflow-hidden relative">
-                                <img src="<?php echo $dlmage; ?>" alt="" width="300" height="200" class="h-56 w-full object-cover">
+                               <a href="<?php echo $pl; ?>">
+								<img src="<?php echo $dlmage; ?>" alt="" width="300" height="200" class="h-56 w-full object-cover">
+								</a>
                                 
                             </div>
                             <div class="fs3-detail p-5">
                                <div class="flex gap-5">
                                     <div class="w-4/6">
-                                        <h3 class="text-black text-lg font-bold font-proxima"><?php echo $blog_title; ?></h3>
-                                        <p class="text-8a text-base font-normal font-proxima">Lorem Ipsum is simply dummy text</p>
+										<a href="<?php echo $pl; ?>">
+											<h3 class="text-black text-lg font-bold font-proxima"><?php echo $blog_title; ?></h3></a>
+                                        <p class="text-8a text-base font-normal font-proxima"><?php echo get_field('content_1', $blog); ?></p>
                                     </div>
                                     <div class="w-1/3">
                                         <span class="text-8a text-sm font-light font-proxima text-right w-full inline-block"><?php echo $dpl ;?></span>
                                     </div>
                                </div>
                                <div class="fs3-comment-like flex items-center justify-between mt-3">
-                                    <a href="#" class="fs3-comments flex items-center gap-3 text-8a font-normal font-proxima text-sm hover:text-orange-400"><img src="<?php echo get_site_url(); ?>/wp-content/themes/tailpress/images/chat.png" alt="" width="15" height="15"> (23) comments</a>
-                                    <a href="#" class="fs3-comments flex items-center gap-3 text-8a font-normal font-proxima text-sm hover:text-orange-400"><img src="<?php echo get_site_url(); ?>/wp-content/themes/tailpress/images/like.png" alt="" width="15" height="15"> (52) likes</a>
+                                    <a href="<?php echo $pl; ?>" class="fs3-comments flex items-center gap-3 text-8a font-normal font-proxima text-sm hover:text-orange-400">
+										<img src="<?php echo get_site_url(); ?>/wp-content/themes/tailpress/images/chat.png" alt="" width="15" height="15"> (<?php echo get_post( $blog )->comment_count; ?>) comments</a>
+								   <?php echo do_shortcode('[posts_like_dislike id='.$blog.']');?>
+<!--                                     <a href="#" class="fs3-comments flex items-center gap-3 text-8a font-normal font-proxima text-sm hover:text-orange-400">
+										<img src="<?php echo get_site_url(); ?>/wp-content/themes/tailpress/images/like.png" alt="" width="15" height="15"> (52) likes</a> -->
                                </div>
 
                             </div>

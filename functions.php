@@ -222,8 +222,110 @@ foreach( $loop34 as $itm ){
 	return $sellingProducts;	
 }
 
+
+
+add_shortcode('woocommerce_recent_products', 'recent_products');
+function recent_products(){
+	global $woocommarce;
+	$argsrec = array(
+		'post_type' => 'product',
+		'orderby' => 'date',
+		'order' => 'DESC',
+		'posts_per_page' => 3,
+	);
+
+	$looprec = new WP_Query( $argsrec );
+	
+	$recentProducts = "";
+	while( $looprec->have_posts() ) : $looprec->the_post(); 
+	global $product; 
+	$image = $product->get_image();?>
+	<div class="home-products-block rounded-2xl shadow shadow-gray-300">
+	<div class="home-product-image rounded-2xl p-5 shadow shadow-gray-300 relative">
+	<a href="<?php echo $product->get_permalink(); ?>">
+	<?php echo $image; ?>
+	</a>
+		<span class="product-rotate-text">G-Bonomi-Figli</span>
+	</div>
+	<div class="home-product-detail p-5">
+	<a href="<?php echo $product->get_permalink(); ?>">
+		<div class="title-color font-normal text-base mb-4"><?php echo $product->get_title() ?></div>
+		</a>
+		<div class="home-product-shipping grid grid-cols-2 grid-flow-row gap-4">
+			<div class="hps-left flex items-center gap-3">
+				<span class="shadow shadow-gray-300 bg-white px-2">
+					<img src="<?php echo get_site_url(); ?>/wp-content/themes/tailpress/images/truck.png" alt="" class="w-6">
+				</span>
+				<span class="text-xs title-color font-normal">Op <br/>voorraad</span>
+			</div>
+			<div class="hps-right">
+				<span class="text-xs title-color font-normal text-left">Nu bested, dinsdag bezorgd</span>
+			</div>	
+		</div>
+		<div class="home-product-bottom flex items-center justify-between mt-4">
+			<div class="home-product-price">
+				<span class="text-black font-bold text-base">€<?php echo $product->get_regular_price(); ?></span>
+				<p class="title-color font-normal text-sm">Per stuk</p>
+			</div>
+			<div class="flex gap-1">
+				<div class="quantity buttons_added">
+					<input type="button" value="-" class="minus">
+					<input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode="">
+					<input type="button" value="+" class="plus">
+				</div>
+				<div class="actiondiv">
+					<a href="?add-to-cart=<?php echo $product->get_id(); ?>" data-quantity="1" class="px-8 py-1 rounded-sm uppercase text-sm bg-orange text-white font-normal hover:bg-black add_to_cart_button ajax_add_to_cart" data-product_id="<?php echo $product->get_id(); ?>" data-product_sku="<?php echo $product->get_sku(); ?>" aria-label="Add “WC haakje Stout RVS 47x16mm” to your cart" rel="nofollow">bestel</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<?php endwhile; 
+ wp_reset_query(); 
+	return $recentProducts;
+
+}
+
+ 
+
 // Creating a Deals Custom Post Type
-function crunchify_deals_custom_post_type() {
+function faq_custom_post_type() {
+	$labels = array(
+		'name'                => __( 'FAQ' ),
+		'singular_name'       => __( 'FAQ'),
+		'menu_name'           => __( 'FAQ'),
+		'all_items'           => __( 'All FAQS'),
+		'view_item'           => __( 'View FAQ'),
+		'add_new_item'        => __( 'Add New FAQ'),
+		'add_new'             => __( 'Add New'),
+		'edit_item'           => __( 'Edit FAQ'),
+		'update_item'         => __( 'Update FAQ'),
+		'search_items'        => __( 'Search FAQ')
+	);
+	$args = array(
+		'label'               => __( 'FAQ'),
+		'description'         => __( 'FAQ'),
+		'labels'              => $labels,
+		'supports'            => array( 'title', 'editor', 'excerpt', 'author', 'thumbnail', 'revisions', 'custom-fields'),
+		'public'              => true,
+		'hierarchical'        => false,
+		'show_ui'             => true,
+		'show_in_menu'        => true,
+		'show_in_nav_menus'   => true,
+		'show_in_admin_bar'   => true,
+		'has_archive'         => true,
+		'can_export'          => true,
+		'exclude_from_search' => false,
+        'yarpp_support'       => true,
+		'taxonomies' 	      => array('post_tag'),
+		'publicly_queryable'  => true,
+		'capability_type'     => 'page'
+);
+	register_post_type( 'faqs', $args );
+}
+add_action( 'init', 'faq_custom_post_type', 0 );
+// Creating a Deals Custom Post Type
+function knowledge_base_custom_post_type() {
 	$labels = array(
 		'name'                => __( 'Knowledge Base' ),
 		'singular_name'       => __( 'Knowledge Base'),
@@ -241,7 +343,7 @@ function crunchify_deals_custom_post_type() {
 		'label'               => __( 'Knowledge Base'),
 		'description'         => __( 'Knowledge Base'),
 		'labels'              => $labels,
-		'supports'            => array( 'title', 'editor', 'excerpt', 'author', 'thumbnail', 'revisions', 'custom-fields'),
+		'supports'            => array( 'title', 'editor', 'excerpt', 'author', 'thumbnail', 'revisions', 'custom-fields', 'comments'),
 		'public'              => true,
 		'hierarchical'        => false,
 		'show_ui'             => true,
@@ -260,6 +362,33 @@ function crunchify_deals_custom_post_type() {
 }
 add_action( 'init', 'knowledge_base_custom_post_type', 0 );
 
-//DayZ Customizations 
-// include get_template_directory() . '/includes/dayz-customize.php'; 
-//End of DayZ Customizations
+
+// Let us create Taxonomy for Custom Post Type
+add_action( 'init', 'knowledge_base_custom_taxonomy', 0 );
+ 
+//create a custom taxonomy name it "type" for your posts
+function knowledge_base_custom_taxonomy() {
+ 
+  $labels = array(
+    'name' => _x( 'Category', 'Category' ),
+    'singular_name' => _x( 'Type', 'Category' ),
+    'search_items' =>  __( 'Search Categories' ),
+    'all_items' => __( 'All Categories' ),
+    'parent_item' => __( 'Parent Category' ),
+    'parent_item_colon' => __( 'Parent Category:' ),
+    'edit_item' => __( 'Edit Category' ), 
+    'update_item' => __( 'Update Category' ),
+    'add_new_item' => __( 'Add New Category' ),
+    'new_item_name' => __( 'New Category Name' ),
+    'menu_name' => __( 'Categories' ),
+  ); 	
+ 
+  register_taxonomy('knowledge-base-category',array('knowledge-base'), array(
+    'hierarchical' => true,
+    'labels' => $labels,
+    'show_ui' => true,
+    'show_admin_column' => true,
+    'query_var' => true,
+    'rewrite' => array( 'slug' => 'knowledge-base-category' ),
+  ));
+}

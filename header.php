@@ -168,7 +168,7 @@
   <link rel="stylesheet" type="text/css" href="	
 <?php echo get_site_url(); ?>/wp-content/themes/tailpress/slick-theme.css">
 	<link rel='stylesheet'  href='	
-<?php echo get_site_url(); ?>/wp-content/themes/tailpress/style.css?v=175' type='text/css' media='all' />
+<?php echo get_site_url(); ?>/wp-content/themes/tailpress/style.css?v=190' type='text/css' media='all' />
 	<script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
   <script src="	
 <?php echo get_site_url(); ?>/wp-content/themes/tailpress/slick.js" type="text/javascript" charset="utf-8"></script>
