@@ -31,7 +31,7 @@
 	"devDependencies": {
 		"@jeffreyvr/tailwindcss-tailpress": "^0.1.0",
 		"autoprefixer": "^10.4.0",
-		"browser-sync": "^2.26.14",
+		"browser-sync": "^2.27.7",
 		"concurrently": "^6.2.1",
 		"cross-env": "^6.0.3",
 		"esbuild": "^0.12.24",
