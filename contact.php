@@ -1,8 +1,6 @@
-<?php
-/* Template Name: Contact Page */
+<?php /* Template Name: Contact Page */
 get_header(); ?>
-
-<div class="contact-page-main w-full inline-block py-9 dark:bg-black">
+<div class="contact-page-main w-full inline-block py-9">
     <div class="contact-section-1">
         <div class="container mx-auto">
             <div class="flex gap-8">
@@ -35,7 +33,7 @@ get_header(); ?>
                                 <a href="#" class="social-link"><img src="<?php echo get_site_url(); ?>/wp-content/themes/tailpress/images/linked-in.png" alt=""></a>
                             </div>
                             <div class="cs1-image-map w-full inline-block relative">
-<!--                                 <img src="<?php echo get_site_url(); ?>/wp-content/themes/tailpress/images/map.png" alt="" width="926" height="1026" > -->
+                             
 								<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3156.9904156973384!2d144.92588431509785!3d-37.69642413511075!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad65af021e39501%3A0x63c70d2e1977824b!2s90%20Glen%20St%2C%20Glenroy%20VIC%203046%2C%20Australia!5e0!3m2!1sen!2sin!4v1646025117149!5m2!1sen!2sin" width="750" height="500" style="border:0; border-radius:42px;" allowfullscreen="" loading="lazy"></iframe>
                             </div>
                     </div>
@@ -65,78 +63,44 @@ get_header(); ?>
 						     $pl = get_permalink( $blog );
 						     $dpl	= get_the_time('d/m/Y', $blog);
 						    $dlmage = wp_get_attachment_url( get_post_thumbnail_id($blog));
-							echo $content = get_post( $blog )->post_content;
-						  
 						?>
                         <div class="fs3-block rounded-2xl shadow shadow-gray-300 overflow-hidden">
                             <div class="fs3-image rounded-2xl shadow shadow-gray-300 overflow-hidden relative">
-                                <img src="<?php echo $dlmage; ?>" alt="" width="300" height="200" class="h-56 w-full object-cover">
+                               <a href="<?php echo $pl; ?>">
+								<img src="<?php echo $dlmage; ?>" alt="" width="300" height="200" class="h-56 w-full object-cover">
+								</a>
                                 
                             </div>
                             <div class="fs3-detail p-5">
                                <div class="flex gap-5">
                                     <div class="w-4/6">
-                                        <h3 class="text-black text-lg font-bold font-proxima"><?php echo $blog_title; ?></h3>
-                                        <p class="text-8a text-base font-normal font-proxima">Lorem Ipsum is simply dummy text</p>
+										<a href="<?php echo $pl; ?>">
+											<h3 class="text-black text-lg font-bold font-proxima">
+												<?php echo $blog_title; ?>
+											</h3>
+										</a>
+                                        <p class="text-8a text-base font-normal font-proxima">
+											<?php echo get_field('content_1', $blog); ?>
+										</p>
                                     </div>
                                     <div class="w-1/3">
-                                        <span class="text-8a text-sm font-light font-proxima text-right w-full inline-block"><?php echo $dpl ;?></span>
+                                        <span class="text-8a text-sm font-light font-proxima text-right w-full inline-block">
+											<?php echo $dpl ;?>
+										</span>
                                     </div>
                                </div>
                                <div class="fs3-comment-like flex items-center justify-between mt-3">
-                                    <a href="#" class="fs3-comments flex items-center gap-3 text-8a font-normal font-proxima text-sm hover:text-orange-400"><img src="<?php echo get_site_url(); ?>/wp-content/themes/tailpress/images/chat.png" alt="" width="15" height="15"> (23) comments</a>
-                                    <a href="#" class="fs3-comments flex items-center gap-3 text-8a font-normal font-proxima text-sm hover:text-orange-400"><img src="<?php echo get_site_url(); ?>/wp-content/themes/tailpress/images/like.png" alt="" width="15" height="15"> (52) likes</a>
+                                    <a href="<?php echo $pl; ?>" class="fs3-comments flex items-center gap-3 text-8a font-normal font-proxima text-sm hover:text-orange-400">
+										<img src="<?php echo get_site_url(); ?>/wp-content/themes/tailpress/images/chat.png" alt="" width="15" height="15"> (<?php echo get_post( $blog )->comment_count; ?>) comments</a>
+								   <?php echo do_shortcode('[posts_like_dislike id='.$blog.']');?>
+
                                </div>
 
                             </div>
                         </div> 
 						
 <?php } ?>
-<!--                         <div class="fs3-block rounded-2xl shadow shadow-gray-300 overflow-hidden">
-                            <div class="fs3-image rounded-2xl shadow shadow-gray-300 overflow-hidden relative">
-                                <img src="<?php echo get_site_url(); ?>/wp-content/themes/tailpress/images/fs-2.png" alt="" width="300" height="200" class="h-56 w-full object-cover">
-                                
-                            </div>
-                            <div class="fs3-detail p-5">
-                               <div class="flex gap-5">
-                                    <div class="w-4/6">
-                                        <h3 class="text-black text-lg font-bold font-proxima">Lorem Ipsum</h3>
-                                        <p class="text-8a text-base font-normal font-proxima">Lorem Ipsum is simply dummy text</p>
-                                    </div>
-                                    <div class="w-1/3">
-                                        <span class="text-8a text-sm font-light font-proxima text-right w-full inline-block">23/10/2021</span>
-                                    </div>
-                               </div>
-                               <div class="fs3-comment-like flex items-center justify-between mt-3">
-                                    <a href="#" class="fs3-comments flex items-center gap-3 text-8a font-normal font-proxima text-sm hover:text-orange-400"><img src="<?php echo get_site_url(); ?>/wp-content/themes/tailpress/images/chat.png" alt="" width="15" height="15"> (23) comments</a>
-                                    <a href="#" class="fs3-comments flex items-center gap-3 text-8a font-normal font-proxima text-sm hover:text-orange-400"><img src="<?php echo get_site_url(); ?>/wp-content/themes/tailpress/images/like.png" alt="" width="15" height="15"> (52) likes</a>
-                               </div>
 
-                            </div>
-                        </div> 
-
-                        <div class="fs3-block rounded-2xl shadow shadow-gray-300 overflow-hidden">
-                            <div class="fs3-image rounded-2xl shadow shadow-gray-300 overflow-hidden relative">
-                                <img src="<?php echo get_site_url(); ?>/wp-content/themes/tailpress/images/fs-3.png" alt="" width="300" height="200" class="h-56 w-full object-cover">
-                                
-                            </div>
-                            <div class="fs3-detail p-5">
-                               <div class="flex gap-5">
-                                    <div class="w-4/6">
-                                        <h3 class="text-black text-lg font-bold font-proxima">Lorem Ipsum</h3>
-                                        <p class="text-8a text-base font-normal font-proxima">Lorem Ipsum is simply dummy text</p>
-                                    </div>
-                                    <div class="w-1/3">
-                                        <span class="text-8a text-sm font-light font-proxima text-right w-full inline-block">23/10/2021</span>
-                                    </div>
-                               </div>
-                               <div class="fs3-comment-like flex items-center justify-between mt-3">
-                                    <a href="#" class="fs3-comments flex items-center gap-3 text-8a font-normal font-proxima text-sm hover:text-orange-400"><img src="<?php echo get_site_url(); ?>/wp-content/themes/tailpress/images/chat.png" alt="" width="15" height="15"> (23) comments</a>
-                                    <a href="#" class="fs3-comments flex items-center gap-3 text-8a font-normal font-proxima text-sm hover:text-orange-400"><img src="<?php echo get_site_url(); ?>/wp-content/themes/tailpress/images/like.png" alt="" width="15" height="15"> (52) likes</a>
-                               </div>
-
-                            </div>
-                        </div>  -->
 
                         
                     </div>

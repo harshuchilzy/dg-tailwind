@@ -37,7 +37,6 @@ get_header();
 							<p class="text-grey text-lg font-normal mt-4">
 								<?php echo get_field('slider_description_2') ?>
 							</p>
-
 						</div>
 					</div>
 					<div>
@@ -111,14 +110,19 @@ get_header();
 					<div class="home-section-2-detail absolute flex justify-between flex-col top-0 left-0 bottom-0 right-0 p-8 ">
 						<div>
 							<span class="text-black text-3xl font-bold">
-								<?php echo get_field('section_2_left_title'); ?>
+								<?php 
+								$term = get_field('section_2_left_title');
+								if( $term ): ?>
+								<?php echo esc_html( $term->name ); ?>
+								<?php endif; ?>
+								
 							</span>
 							<p class="text-black text-base font-normal">
 								<?php echo get_field('section_2_left_sub_title'); ?>
 							</p>   
 						</div>
 						<div>
-							<a href="<?php echo get_field('section_2_left_shop_button_link'); ?>" class="home-section-2-btn rounded-2xl font-bold inline-block bg-white text-orange uppercase text-base px-5 py-3 hover:bg-orange-500 hover:text-white">SHOP NOW</a>
+							<a href="<?php echo esc_url( get_term_link( $term ) ); ?>" class="home-section-2-btn rounded-2xl font-bold inline-block bg-white text-orange uppercase text-base px-5 py-3 hover:bg-orange-500 hover:text-white">SHOP NOW</a>
 						</div>
 					</div>
 				</div>
@@ -132,14 +136,18 @@ get_header();
 							<div class="home-section-2-detail absolute flex justify-between flex-col top-0 left-0 bottom-0 right-0 p-8 ">
 								<div>
 									<span class="text-black text-3xl font-bold">
-										<?php echo get_field('section_2_left_title'); ?>
+										<?php 
+										$term = get_field('section_2_left_title');
+										if( $term ): ?>
+										<?php echo esc_html( $term->name ); ?>
+										<?php endif; ?>
 									</span>
 									<p class="text-black text-base font-normal">
 										<?php echo get_field('section_2_left_sub_title'); ?>
 									</p>   
 								</div>
 								<div>
-									<a href="<?php echo get_field('section_2_left_shop_button_link'); ?>" class="home-section-2-btn rounded-2xl font-bold inline-block bg-white text-orange uppercase text-base px-5 py-3 hover:bg-orange-500 hover:text-white">SHOP NOW</a>
+									<a href="<?php echo esc_url( get_term_link( $term ) ); ?>" class="home-section-2-btn rounded-2xl font-bold inline-block bg-white text-orange uppercase text-base px-5 py-3 hover:bg-orange-500 hover:text-white">SHOP NOW</a>
 								</div>
 							</div>
 						</div>
@@ -151,14 +159,19 @@ get_header();
 							<div class="home-section-2-detail absolute flex justify-between flex-col top-0 left-0 bottom-0 right-0 p-5 ">
 								<div>
 									<span class="text-black text-lg font-bold">
-										<?php echo get_field('section_2_right_title_1'); ?>
+										<?php 
+										$term2 = get_field('section_2_right_title_1');
+										if( $term2 ): ?>
+										<?php echo esc_html( $term2->name ); ?>
+										<?php endif; ?>
+										
 									</span>
 									<p class="text-black text-xs font-normal">
 										<?php echo get_field('section_2_right_subtitle_1'); ?>
 									</p>   
 								</div>
 								<div>
-									<a href="<?php echo get_field('section_2_right_image_link_1'); ?>" class="text-2xl">
+									<a href="<?php echo esc_url( get_term_link( $term2 ) ); ?>" class="text-2xl">
 										<img src="<?php echo get_site_url(); ?>/wp-content/themes/tailpress/images/arrow-black.png" alt="" class="w-7">
 									</a>
 								</div>
@@ -172,14 +185,19 @@ get_header();
 							<div class="home-section-2-detail absolute flex justify-between flex-col top-0 left-0 bottom-0 right-0 p-5 ">
 								<div>
 									<span class="text-black text-lg font-bold">
-										<?php echo get_field('section_2_right_title_2'); ?>
+										<?php 
+										$term3 = get_field('section_2_right_title_2');
+										if( $term3 ): ?>
+										<?php echo esc_html( $term3->name ); ?>
+										<?php endif; ?>
+										
 									</span>
 									<p class="text-black text-xs font-normal">
 										<?php echo get_field('section_2_right_subtitle_2'); ?>
 									</p>   
 								</div>
 								<div>
-									<a href="<?php echo get_field('section_2_right_image_link_2'); ?>" class="text-2xl">
+									<a href="<?php echo esc_url( get_term_link( $term3 ) ); ?>" class="text-2xl">
 										<img src="<?php echo get_site_url(); ?>/wp-content/themes/tailpress/images/arrow-black.png" alt="" class="w-7">
 									</a>
 								</div>
@@ -192,14 +210,19 @@ get_header();
 							<div class="home-section-2-detail absolute flex justify-between flex-col top-0 left-0 bottom-0 right-0 p-5 ">
 								<div>
 									<span class="text-black text-lg font-bold">
-										<?php echo get_field('section_2_right_title_3'); ?>
+										<?php 
+										$term4 = get_field('section_2_right_title_3');
+										if( $term4 ): ?>
+										<?php echo esc_html( $term4->name ); ?>
+										<?php endif; ?>
+										
 									</span>
 									<p class="text-black text-xs font-normal">
 										<?php echo get_field('section_2_right_subtitle_3'); ?>
 									</p>   
 								</div>
 								<div>
-									<a href="<?php echo get_field('section_2_right_image_link_3'); ?>" class="text-2xl">
+									<a href="<?php echo esc_url( get_term_link( $term4 ) ); ?>" class="text-2xl">
 										<img src="<?php echo get_site_url(); ?>/wp-content/themes/tailpress/images/arrow-black.png" alt="" class="w-7">
 									</a>
 								</div>
@@ -213,14 +236,19 @@ get_header();
 							<div class="home-section-2-detail absolute flex justify-between flex-col top-0 left-0 bottom-0 right-0 p-5 ">
 								<div>
 									<span class="text-black text-lg font-bold">
-										<?php echo get_field('section_2_right_title_4'); ?>
+										<?php 
+										$term5 = get_field('section_2_right_title_4');
+										if( $term5 ): ?>
+										<?php echo esc_html( $term5->name ); ?>
+										<?php endif; ?>
+										
 									</span>
 									<p class="text-black text-xs font-normal">
 										<?php echo get_field('section_2_right_subtitle_4'); ?>
 									</p> 
 								</div>
 								<div>
-									<a href="<?php echo get_field('section_2_right_image_link_4'); ?>" class="text-2xl">
+									<a href="<?php echo esc_url( get_term_link( $term5 ) ); ?>" class="text-2xl">
 										<img src="<?php echo get_site_url(); ?>/wp-content/themes/tailpress/images/arrow-black.png" alt="" class="w-7">
 									</a>
 								</div>
@@ -366,7 +394,9 @@ get_header();
 									<a href="'.get_permalink( $product->get_id() ).'">
 										<img src="'.$image_url.'" alt="" class="h-56 w-auto mx-auto">
 										</a>
-										<span class="product-rotate-text">G-Bonomi-Figli</span>
+										<span class="product-rotate-text">
+										 '.get_brands($product->get_id()).'
+										</span>
 									</div>
 									<div class="home-product-detail p-5">
 									<a href="'.get_permalink( $product->get_id() ).'">
@@ -426,7 +456,9 @@ get_header();
 									<a href="'.get_permalink( $product->get_id() ).'">
 										<img src="'.$image_url.'" alt="" class="h-56 w-auto mx-auto">
 										</a>
-										<span class="product-rotate-text">G-Bonomi-Figli</span>
+										<span class="product-rotate-text">
+										'.get_brands($product->get_id()).'
+										</span>
 									</div>
 									<div class="home-product-detail p-5">
 									<a href="'.get_permalink( $product->get_id() ).'">
@@ -486,7 +518,9 @@ get_header();
 									<a href="'.get_permalink( $product->get_id() ).'">
 										<img src="'.$image_url.'" alt="" class="h-56 w-auto mx-auto">
 										</a>
-										<span class="product-rotate-text">G-Bonomi-Figli</span>
+										<span class="product-rotate-text">
+										'.get_brands($product->get_id()).'
+										</span>
 									</div>
 									<div class="home-product-detail p-5">
 									<a href="'.get_permalink( $product->get_id() ).'">
@@ -591,7 +625,9 @@ get_header();
 						$htproductTitle1 = $product->get_title();
 						$htProductLink1 = get_permalink( $htProdId1 );
 					?>
-					<span class="p-top-tag bg-orange text-white text-sm">G-Bonomi-Figli</span>
+					<span class="p-top-tag bg-orange text-white text-sm">
+						<?php echo get_brands($htProdId1); ?>
+					</span>
 					<img src="<?php echo $htProductImage1; ?>" alt="" class="h-56 w-auto mx-auto my-8">
 					<a href="<?php echo $htProductLink1; ?>">
 						<div class="p-regular-price font-normal text-orange text-base title-color mb-4">
@@ -637,7 +673,9 @@ get_header();
 						$htproductTitle2 = $product->get_title();
 						$htProductLink2 = get_permalink( $htProdId2 );
 					?>
-					<span class="p-top-tag bg-orange text-white text-sm">G-Bonomi-Figli</span>
+					<span class="p-top-tag bg-orange text-white text-sm">
+						<?php echo get_brands($htProdId2); ?>
+					</span>
 					<img src="<?php echo $htProductImage2; ?>" alt="" class="h-56 w-auto mx-auto my-8">
 					<a href="<?php echo $htProductLink2; ?>">
 					<div class="p-regular-price font-normal text-orange text-base title-color mb-4">
@@ -683,7 +721,9 @@ get_header();
 						$htproductTitle3 = $product->get_title();
 						$htProductLink3 = get_permalink( $htProdId3 );
 					?>
-					<span class="p-top-tag bg-orange text-white text-sm">G-Bonomi-Figli</span>
+					<span class="p-top-tag bg-orange text-white text-sm">
+						<?php echo get_brands($htProdId3); ?>
+					</span>
 					<img src="<?php echo $htProductImage3; ?>" alt="" class="h-56 w-auto mx-auto my-8">
 					<a href="<?php echo $htProductLink3; ?>">
 					<div class="p-regular-price font-normal text-orange text-base title-color mb-4">

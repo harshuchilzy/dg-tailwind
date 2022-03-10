@@ -55,24 +55,26 @@ if( is_product_category() || is_shop() ) {
                     </div>
 		<?php the_content(); ?>
 
-								<div class="collection-bottom-banner py-16">
-        <div class="container mx-auto">
-            <div class="cbb-block pr-12 ">
-                <div class="flex items-center gap-8 bg-orange rounded-2xl shadow shadow-gray-200 py-12 px-10">
-                    <div class="w-4/5">
-                        <div class="cbb-detail">
-                    <?php echo get_field('bottom_text'); ?>
-                    </div>
-                    </div>
-                    <div class="w-1/5">
-                        <div class="cbb-image">
-                            <img src="<?php echo get_field('bottom_text_image'); ?>" alt="">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+					<?php if( get_field('bottom_text') != "" ): ?>
+					<div class="collection-bottom-banner py-16">
+						<div class="container mx-auto">
+							<div class="cbb-block pr-12 ">
+								<div class="flex items-center gap-8 bg-orange rounded-2xl shadow shadow-gray-200 py-12 px-10">
+									<div class="w-4/5">
+										<div class="cbb-detail">
+											<?php echo get_field('bottom_text'); ?>
+										</div>
+									</div>
+									<div class="w-1/5">
+										<div class="cbb-image">
+											<img src="<?php echo get_field('bottom_text_image'); ?>" alt="">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<?php endif; ?>
     <div class="home-section-7 section-boder-hide">
 		<div class="container mx-auto">
 			<div class="grid grid-cols-4 grid-flow-row gap-8">

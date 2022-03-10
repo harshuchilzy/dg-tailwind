@@ -31,9 +31,10 @@ if ( post_password_required() ) {
 						'avatar_size' => 56,
 					)
 				);
+			
 			?>
 		</ol>
-
+		
 	<?php endif; ?>
 
 	<?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : ?>
@@ -65,10 +66,30 @@ if ( post_password_required() ) {
 	<?php
 	comment_form(
 		array(
-			'class_submit'  => 'bg-primary text-white cursor-pointer rounded font-bold py-2 px-4',
-			'comment_field' => '<textarea id="comment" name="comment" class="bg-gray-200 w-full py-2 px-3" aria-required="true"></textarea>',
+			'class_submit'  => 'bg-slate-300 text-black cursor-pointer rounded font-bold py-2 px-4',
+			'comment_field' => '<input id="comment" name="comment" class="w-2/3 bg-gray-200" placeholder="Write your comment here..." aria-required="true">',
 		)
 	);
 	?>
 
 </div>
+<style>
+	.post-template input#comment {
+		padding: 16px 16px;
+		background: transparent;
+		border: 1px solid #ddd;
+		border-radius: 25px;
+	}
+	.post-template form#commentform {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	.post-template input#submit {
+		padding: 16px 16px;
+		border-radius: 25px;
+		margin-left: -25px;
+		background: orange;
+		color: #fff;
+	}
+</style>

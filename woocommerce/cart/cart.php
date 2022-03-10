@@ -166,6 +166,36 @@ do_action( 'woocommerce_before_cart' ); ?>
         </a>
 
     </div>
+	
+	<div class="blog-section-5 w-full inline-block pt-10" 
+		 style="background: url(<?php echo get_site_url(); ?>/wp-content/themes/tailpress/images/bs5.png);">
+		<div class="bs5-inner w-full inline-block py-12" >
+			<div class="w-1/2">
+				<div class="bs5-detail w-full inline-block pl-9">
+					<h2 class="uppercase text-black font-proxima font-bold text-4xl inline-block mb-8">
+						Dat was <span class="text-orange">het dan</span>
+					</h2>
+					<p class=" text-black font-proxima font-normal text-2xl inline-block">
+						Wij hebben je nu alles verteld over raambomen, maar het kan natuurlijk
+					</p>
+					<h6 class="text-black font-proxima font-bold text-base inline-block">
+						bellen (0578-760509)
+					</h6>
+					<h6 class="text-black font-proxima font-bold text-base inline-block">
+						of mailen met 
+						<a href="mailto:info@deurbeslaggigant.nl" class="text-orange">
+							info@deurbeslaggigant.nl
+						</a>
+					</h6>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+
+	<div class="copy_this_shortcode" style="display:none">
+			<?php echo do_shortcode('[woocommerce_recent_products]'); ?>
+	</div>
 </form>
 
 <?php do_action( 'woocommerce_before_cart_collaterals' ); ?>
@@ -183,3 +213,4 @@ do_action( 'woocommerce_before_cart' ); ?>
 </div>
 
 <?php do_action( 'woocommerce_after_cart' ); ?>
+

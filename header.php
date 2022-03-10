@@ -3,6 +3,7 @@
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0"/>
 	<link rel="profile" href="http://gmpg.org/xfn/11">
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
 
@@ -166,9 +167,9 @@
 	<link rel="stylesheet" type="text/css" href="	
 <?php echo get_site_url(); ?>/wp-content/themes/tailpress/slick.css">
   <link rel="stylesheet" type="text/css" href="	
-<?php echo get_site_url(); ?>/wp-content/themes/tailpress/slick-theme.css">
+<?php echo get_site_url(); ?>/wp-content/themes/tailpress/slick-theme.css?v=3">
 	<link rel='stylesheet'  href='	
-<?php echo get_site_url(); ?>/wp-content/themes/tailpress/style.css?v=175' type='text/css' media='all' />
+<?php echo get_site_url(); ?>/wp-content/themes/tailpress/style.css?v=351' type='text/css' media='all' />
 	<script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
   <script src="	
 <?php echo get_site_url(); ?>/wp-content/themes/tailpress/slick.js" type="text/javascript" charset="utf-8"></script>
@@ -202,6 +203,48 @@
         infinite: true,
         slidesToShow: 2,
         slidesToScroll: 1,
+		autoplay: true,
+  		autoplaySpeed: 2000
+      });
+      $(".slide-other").slick({
+        infinite: true,
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        arrows: true,
+		autoplay: true,
+  		autoplaySpeed: 2000
+      });
+
+      $(".slide-related").slick({
+        infinite: true,
+        slidesToShow: 2,
+        slidesToScroll: 1,
+        arrows: true,
+		autoplay: true,
+  		autoplaySpeed: 2000
+      });
+
+      $(".slide-rozes").slick({
+        infinite: true,
+        slidesToShow: 2,
+        slidesToScroll: 1,
+        arrows: true,
+		autoplay: true,
+  		autoplaySpeed: 2000
+      });
+      $(".slide-keyrozes").slick({
+        infinite: true,
+        slidesToShow: 2,
+        slidesToScroll: 1,
+        arrows: true,
+		autoplay: true,
+  		autoplaySpeed: 2000
+      });
+      $(".slide-cilinderrozes").slick({
+        infinite: true,
+        slidesToShow: 2,
+        slidesToScroll: 1,
+        arrows: true,
 		autoplay: true,
   		autoplaySpeed: 2000
       });
