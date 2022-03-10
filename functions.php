@@ -421,7 +421,6 @@ function knowledge_base_custom_taxonomy() {
   ));
 }
 
-
 add_action( 'woocommerce_product_bulk_edit_end', 'wcerbe_woocommerce_product_bulk_edit_end' );
 function wcerbe_woocommerce_product_bulk_edit_end() {
     $output = '<label><span class="title">' . esc_html__( "Enable reviews", "woocommerce" ) . '?</span>';

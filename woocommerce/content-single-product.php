@@ -290,9 +290,13 @@ if ( post_password_required() ) {
             <div class="tab">
                 <button class="tablinks active" onclick="openCity(event, 'tab-1')">DESCRIPTION</button>
                 <button class="tablinks" onclick="openCity(event, 'tab-2')">PRODUCT DETAILS</button>
+<<<<<<< HEAD
                 <button class="tablinks" onclick="openCity(event, 'tab-3')">
 					REVIEWS (<?php echo $product->get_review_count(); ?>)
 				</button>
+=======
+                <button class="tablinks" onclick="openCity(event, 'tab-3')">REVIEWS (<?php echo $count = $product->get_review_count();?>)</button>
+>>>>>>> f152c2e5fa00a6c94c0f0f32d351f84507ba3bca
             </div>
             <div id="tab-1" class="tabcontent" style="display: block;">
                 <div class="pdt-block flex gap-8 py-12 items-center">
@@ -775,6 +779,7 @@ if ( post_password_required() ) {
                 </div>
                 <div class="w-1/2">
                     <div class="product-specification-image">
+<<<<<<< HEAD
 						<?php 
 							global $post, $product;
 							if( is_a($product, 'WC_Product'))
@@ -787,12 +792,25 @@ if ( post_password_required() ) {
 								 }
 						?>
 						<img src="<?php echo $link; ?>" alt="">
+=======
+						<?php
+						global $product;
+// 								 $id = get_queried_object_id();
+// 								 $product = $id;
+					
+								 $attachment_ids = $product->get_gallery_image_ids();
+								 $attachment_id = $attachment_ids[0];
+								  $thumbnail = wp_get_attachment_image( $attachment_id );
+						?>
+                        <?php echo $thumbnail; ?>
+>>>>>>> f152c2e5fa00a6c94c0f0f32d351f84507ba3bca
                     </div>
                 </div>
             </div>
           </div>
     </div>
     </div>
+<<<<<<< HEAD
 <script>
 	$('.mob_thumb').slick({
 		infinite: true,
@@ -815,4 +833,10 @@ if ( post_password_required() ) {
 	.single-product textarea#comment {
 		border: 1px solid #ddd;
 	}
+=======
+<style>
+	.product-template-default div#comments {
+    display: none;
+}
+>>>>>>> f152c2e5fa00a6c94c0f0f32d351f84507ba3bca
 </style>

@@ -1,18 +1,16 @@
 <?php
 
-add_filter('manage_edit-shop_order_columns', 'bbloomer_add_new_order_admin_list_column');
-
-function bbloomer_add_new_order_admin_list_column($columns)
-{
+add_filter( 'manage_edit-shop_order_columns', 'dayz_add_new_order_admin_list_column' );
+ 
+function dayz_add_new_order_admin_list_column( $columns ) {
     $columns['good_of_cost'] = 'Good of Cost';
     return $columns;
 }
-
-add_action('manage_shop_order_posts_custom_column', 'bbloomer_add_new_order_admin_list_column_content', 10, 2);
-
-function bbloomer_add_new_order_admin_list_column_content($column, $order_id)
-{
-    if ('good_of_cost' === $column) {
+ 
+add_action( 'manage_shop_order_posts_custom_column', 'dayz_add_new_order_admin_list_column_content' , 10 ,2);
+ 
+function dayz_add_new_order_admin_list_column_content( $column , $order_id) {
+    if ( 'good_of_cost' === $column ) {
         // Iterating through each WC_Order_Item_Product objects
         $the_order = wc_get_order($order_id);
         $purchase_price = 0;
@@ -30,9 +28,7 @@ function bbloomer_add_new_order_admin_list_column_content($column, $order_id)
 }
 
 /* Create b2b User Role */
-add_role(
-    'b_2_b', //  System name of the role.
-    __('B2B'), // Display name of the role.
+add_role( 'b2b', __( 'B2B'  ), // Display name of the role.
     array(
         'read'  => true,
         'delete_posts'  => true,
@@ -47,16 +43,15 @@ add_role(
     )
 );
 
-function b2b_price_single_page()
-{
-    global $product;
-    $user = wp_get_current_user();
-    if (in_array('b_2_b', $user->roles)) {
-        $product_id = $product->get_id();
-        $b2b_price = get_post_meta($product_id, 'b2b_price', true);
-        echo 'dealer price :';
-        echo $b2b_price;
-    }
+function b2b_price_single_page() {
+   global $product;
+   $user = wp_get_current_user();
+   if ( in_array( 'b2b', $user->roles ) ) {
+   $product_id = $product->get_id();
+   $b2b_price = get_post_meta($product_id , 'b2b_price', true);
+   echo 'dealer price :' ;
+   echo $b2b_price;
+   }
 }
 add_action('woocommerce_before_single_product', 'b2b_price_single_page', 30);
 
@@ -81,46 +76,44 @@ add_action('woocommerce_before_single_product', 'minimum_buy_for_discount_single
 
 // -----------------------------------------
 // 1. Add custom field input @ Product Data > Variations > Single Variation
-
-add_action('woocommerce_variation_options_pricing', 'bbloomer_add_custom_field_to_variations', 10, 3);
-
-function bbloomer_add_custom_field_to_variations($loop, $variation_data, $variation)
-{
-    woocommerce_wp_text_input(array(
-        'id' => 'supplier_article_number[' . $loop . ']',
-        'class' => 'short',
-        'label' => __('Supplier Article Number', 'woocommerce'),
-        'value' => get_post_meta($variation->ID, 'supplier_article_number', true),
-    ));
-    woocommerce_wp_text_input(array(
-        'id' => 'delivery_sort_order_if_stock[' . $loop . ']',
-        'class' => 'short',
-        'label' => __('Delivery Sort Order if Stock', 'woocommerce'),
-        'value' => get_post_meta($variation->ID, 'delivery_sort_order_if_stock', true)
-    ));
-    woocommerce_wp_text_input(array(
-        'id' => 'delivery_sort_order_if_no_stock[' . $loop . ']',
-        'class' => 'short',
-        'label' => __('Delivery sort order if no stock', 'woocommerce'),
-        'value' => get_post_meta($variation->ID, 'delivery_sort_order_if_no_stock', true)
-    ));
+ 
+add_action( 'woocommerce_variation_options_pricing', 'dayz_add_custom_field_to_variations', 10, 3 );
+ 
+function dayz_add_custom_field_to_variations( $loop, $variation_data, $variation ) {
+   woocommerce_wp_text_input( array(
+    'id' => 'supplier_article_number[' . $loop . ']',
+    'class' => 'short',
+    'label' => __( 'Supplier Article Number', 'woocommerce' ),
+    'value' => get_post_meta( $variation->ID, 'supplier_article_number', true ),
+   ) );
+   woocommerce_wp_text_input( array(
+    'id' => 'delivery_sort_order_if_stock[' . $loop . ']',
+    'class' => 'short',
+    'label' => __( 'Delivery Sort Order if Stock', 'woocommerce' ),
+    'value' => get_post_meta( $variation->ID, 'delivery_sort_order_if_stock', true )
+   ) );
+   woocommerce_wp_text_input( array(
+    'id' => 'delivery_sort_order_if_no_stock[' . $loop . ']',
+    'class' => 'short',
+    'label' => __( 'Delivery sort order if no stock', 'woocommerce' ),
+    'value' => get_post_meta( $variation->ID, 'delivery_sort_order_if_no_stock', true )
+   ) );
 }
 
 // -----------------------------------------
 // 2. Save custom field on product variation save
+ 
+add_action( 'woocommerce_save_product_variation', 'dayz_save_custom_field_variations', 10, 2 );
+ 
+function dayz_save_custom_field_variations( $variation_id, $i ) {
+   $supplier_article_number = $_POST['supplier_article_number'][$i];
+   if ( isset( $supplier_article_number ) ) update_post_meta( $variation_id, 'supplier_article_number', esc_attr( $supplier_article_number ) );
 
-add_action('woocommerce_save_product_variation', 'bbloomer_save_custom_field_variations', 10, 2);
+   $delivery_sort_order_if_stock = $_POST['delivery_sort_order_if_stock'][$i];
+   if ( isset( $delivery_sort_order_if_stock ) ) update_post_meta( $variation_id, 'delivery_sort_order_if_stock', esc_attr( $delivery_sort_order_if_stock ) );
 
-function bbloomer_save_custom_field_variations($variation_id, $i)
-{
-    $supplier_article_number = $_POST['supplier_article_number'][$i];
-    if (isset($supplier_article_number)) update_post_meta($variation_id, 'supplier_article_number', esc_attr($supplier_article_number));
-
-    $delivery_sort_order_if_stock = $_POST['delivery_sort_order_if_stock'][$i];
-    if (isset($delivery_sort_order_if_stock)) update_post_meta($variation_id, 'delivery_sort_order_if_stock', esc_attr($delivery_sort_order_if_stock));
-
-    $delivery_sort_order_if_no_stock = $_POST['delivery_sort_order_if_no_stock'][$i];
-    if (isset($delivery_sort_order_if_no_stock)) update_post_meta($variation_id, 'delivery_sort_order_if_no_stock', esc_attr($delivery_sort_order_if_no_stock));
+   $delivery_sort_order_if_no_stock = $_POST['delivery_sort_order_if_no_stock'][$i];
+   if ( isset( $delivery_sort_order_if_no_stock ) ) update_post_meta( $variation_id, 'delivery_sort_order_if_no_stock', esc_attr( $delivery_sort_order_if_no_stock ) );
 }
 
 // -----------------------------------------
@@ -146,12 +139,12 @@ function speed_delivery_single_page()
 add_action('woocommerce_before_single_product', 'speed_delivery_single_page', 30);
 
 
-//add to cart speed delivery start
-//** notice:  content-single-product.php add custom html for get data **//
-add_action('wp_ajax_wdm_add_user_custom_data_options', 'wdm_add_user_custom_data_options_callback');
-add_action('wp_ajax_nopriv_wdm_add_user_custom_data_options', 'wdm_add_user_custom_data_options_callback');
+ //add to cart speed delivery start
+ //** notice:  content-single-product.php add custom html for get data **//
+add_action('wp_ajax_wdm_add_user_custom_data_options', 'dayz_add_user_custom_data_options_callback');
+add_action('wp_ajax_nopriv_wdm_add_user_custom_data_options', 'dayz_add_user_custom_data_options_callback');
 
-function wdm_add_user_custom_data_options_callback()
+function dayz_add_user_custom_data_options_callback()
 {
     //Custom data - Sent Via AJAX post method
     $product_id = $_POST['id']; //This is product ID
@@ -161,10 +154,11 @@ function wdm_add_user_custom_data_options_callback()
     die();
 }
 
-add_filter('woocommerce_add_cart_item_data', 'wdm_add_item_data', 1, 2);
-
-if (!function_exists('wdm_add_item_data')) {
-    function wdm_add_item_data($cart_item_data, $product_id)
+add_filter('woocommerce_add_cart_item_data','dayz_add_item_data',1,2);
+ 
+if(!function_exists('dayz_add_item_data'))
+{
+    function dayz_add_item_data($cart_item_data,$product_id)
     {
         /*Here, We are adding item in WooCommerce session with, wdm_user_custom_data_value name*/
         global $woocommerce;
