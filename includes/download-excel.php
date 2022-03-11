@@ -1,27 +1,18 @@
 <?php
 
-function my_custom_submenu_page_callback($order_id) {    
+function download_history_page_callback($order_id) {    
     ?>
         <h1>
-            <?php esc_html_e( 'Dealer Excel Reports', 'my-plugin-textdomain' ); ?>
+            <?php esc_html_e( 'Download History', 'my-plugin-textdomain' ); ?>
         </h1>
-        <button id="download_excel">Export Final</button> <br> <br>
-        <button id="download_draft">Export Draft</button> <br> <br>
-
+        <br><br>
         <input type="checkbox" class="supplier" name="Kok" value="Kok"> Kok
         <input type="checkbox" class="supplier" name="Mauer" value="Mauer"> Mauer
         <input type="checkbox" class="supplier" name="tenlushccer" value="Ten Hulscher"> Ten Hulscher
         <input type="checkbox" class="supplier" name="Artitec" value="Artitec"> Artitec
-
+        <br><br>
         <div class="clon-area"></div>
 
-        <br><br>
-        <select class="select_data">
-            <option value="0">Not Downloaded</option>
-            <option value="1">Downloaded</option>
-              <option value="">All</option>
-        </select>
-        <br><br>
         <table class="table table-bordered" id="excel_table">
             <thead>
                 <tr>
@@ -34,7 +25,6 @@ function my_custom_submenu_page_callback($order_id) {
                 <th>Title</th>
                 <th>Reference</th>
                 <th>Given Delivery Date</th>
-                <th class="noExl">Excel</th>
                 <th class="noExl">Export Date</th>
 
                 </tr>
@@ -51,6 +41,7 @@ function my_custom_submenu_page_callback($order_id) {
             foreach ($orders as $order) {
                 $order_id = $order->get_id();
                 foreach ($order->get_items() as $item_id => $item ) {
+                    if (!empty($item->get_meta('printed_date'))) {
                     $product_id = $item->get_product_id();
                     $product = $item->get_product();
                     $product_name = $item->get_name();
@@ -73,16 +64,15 @@ function my_custom_submenu_page_callback($order_id) {
                     echo "<td>".$product_name."</td>";
                     echo "<td> ". $order_id . "</td>";
                     echo "<td> non </td>";
-                    echo "<td class='noExl'>".$download."</td>";
                     echo "<td class='noExl'>".$printed_date."</td>";
 
                     echo "</tr>";
+                    }
                 }
                }
             }
             echo "</tbody>";    
             echo "</table>";
-
  }
 
 

@@ -28,6 +28,7 @@ do_action( 'woocommerce_before_cart' ); ?>
 				<th class="product-thumbnail">&nbsp;</th>
 				<th class="product-name"><?php esc_html_e( 'Product', 'woocommerce' ); ?></th>
 				<th class="product-price"><?php esc_html_e( 'Price', 'woocommerce' ); ?></th>
+				<th class="product-delivery"><?php esc_html_e( 'ETA', 'woocommerce' ); ?></th>
 				<th class="product-quantity"><?php esc_html_e( 'Quantity', 'woocommerce' ); ?></th>
 				<th class="product-subtotal"><?php esc_html_e( 'Subtotal', 'woocommerce' ); ?></th>
 				<th class="product-remove">&nbsp;</th>
@@ -84,6 +85,10 @@ do_action( 'woocommerce_before_cart' ); ?>
 							<?php
 								echo apply_filters( 'woocommerce_cart_item_price', WC()->cart->get_product_price( $_product ), $cart_item, $cart_item_key ); // PHPCS: XSS ok.
 							?>
+						</td>
+
+						<td class="product-delivery" data-title="<?php esc_attr_e( 'ETA', 'woocommerce' ); ?>">
+							<?php do_action('delivery_eta_notice', $product_id); ?>	
 						</td>
 
 						<td class="product-quantity" data-title="<?php esc_attr_e( 'Quantity', 'woocommerce' ); ?>">
@@ -167,12 +172,8 @@ do_action( 'woocommerce_before_cart' ); ?>
 
     </div>
 	
-<<<<<<< HEAD
 	<div class="blog-section-5 w-full inline-block pt-10" 
 		 style="background: url(<?php echo get_site_url(); ?>/wp-content/themes/tailpress/images/bs5.png);">
-=======
-	<div class="blog-section-5 w-full inline-block pt-10" style="background: url(<?php echo get_site_url(); ?>/wp-content/themes/tailpress/images/bs5.png);">
->>>>>>> f152c2e5fa00a6c94c0f0f32d351f84507ba3bca
 		<div class="bs5-inner w-full inline-block py-12" >
 			<div class="w-1/2">
 				<div class="bs5-detail w-full inline-block pl-9">
@@ -195,34 +196,11 @@ do_action( 'woocommerce_before_cart' ); ?>
 			</div>
 		</div>
 	</div>
-<<<<<<< HEAD
 	
 
 	<div class="copy_this_shortcode" style="display:none">
 			<?php echo do_shortcode('[woocommerce_recent_products]'); ?>
 	</div>
-=======
-	<div class="home-section-3 pb-16">
-	<div class="max-w-5xl mx-auto">
-		<div class="section-header text-center mb-16">
-			<h1 class="text-black text-5xl capital font-bold">
-				New <span class="text-orange">Arrivals</span>
-			</h1>
-			<p class="text-grey font-light">
-				Browse The Collection Of Top Products
-			</p>
-		</div>
-		<div class="grid grid-cols-3 grid-flow-row gap-8">
-			<?php echo do_shortcode('[woocommerce_recent_products]'); ?>
-		</div>
-		<div class="shop__location text-center">
-			<a href="<?php echo get_site_url(); ?>/shop" class="shop_anchor">Shop all collecton</a>
-		</div>
-	</div>
-</div>
-	
-	
->>>>>>> f152c2e5fa00a6c94c0f0f32d351f84507ba3bca
 </form>
 
 <?php do_action( 'woocommerce_before_cart_collaterals' ); ?>

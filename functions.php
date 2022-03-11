@@ -58,7 +58,7 @@ function custom_scripts_method() {
 
     wp_enqueue_script( 'custom-script-export', get_stylesheet_directory_uri() . '/js/jquery.table2excel.min.js', array( 'jquery' ) , '1.0.0' );
     
-	wp_enqueue_script( 'custom-script', get_stylesheet_directory_uri() . '/js/delaer-excel.js', array( 'jquery' ) , '1.8.9' );
+	wp_enqueue_script( 'custom-script', get_stylesheet_directory_uri() . '/js/delaer-excel.js', array( 'jquery' ) , '1.9.1' );
 
 	wp_localize_script( 'custom-script', 'myAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ))); 
 
@@ -421,6 +421,7 @@ function knowledge_base_custom_taxonomy() {
   ));
 }
 
+
 add_action( 'woocommerce_product_bulk_edit_end', 'wcerbe_woocommerce_product_bulk_edit_end' );
 function wcerbe_woocommerce_product_bulk_edit_end() {
     $output = '<label><span class="title">' . esc_html__( "Enable reviews", "woocommerce" ) . '?</span>';
@@ -488,34 +489,34 @@ function ctabutton_handler() {
 	if ( $the_query->have_posts() ) {
 	while ( $the_query->have_posts() ) { $the_query->the_post();  									
 $post_short .= '<div class="fs3-block rounded-2xl shadow shadow-gray-300 overflow-hidden">
-	<div class="fs3-image rounded-2xl shadow shadow-gray-300 overflow-hidden relative">
+	<div class="image-container fs3-image rounded-2xl shadow shadow-gray-300 overflow-hidden relative">
 		<a href="'.get_permalink().'">
 			<img src="'.get_the_post_thumbnail_url().'" alt="" width="300" height="200" class="h-56 w-full object-cover">
 		</a>                      
 	</div>
-	<div class="fs3-detail p-5">
-		<div class="flex gap-5">
-			<div class="w-4/6">
+	<div class="fs3-detail p-5 block-details">
+		<div class="d-flex block-date-text">
+			<div class="w-4/6 ">
 				<a href="'.get_permalink().'">
-					<h3 class="text-black text-lg font-bold font-proxima">
+					<h3 class="heading-3 text-black text-lg font-bold font-proxima">
 						'.get_the_title().'
 					</h3>
 				</a>
- 				<p class="text-8a text-base font-normal font-proxima">
+ 				<p class="paragraph text-8a text-base font-normal font-proxima">
 				'.get_the_content().'
  				</p>
 			
 			</div>
-			<div class="w-1/3">
-				<span class="text-8a text-sm font-light font-proxima text-right w-full inline-block">
+			<div class="w-1/3 align-self">
+				<span class="font-small text-8a text-sm font-light font-proxima text-right w-full inline-block">
 					'.get_the_date('d/m/Y').' 
 				</span>
 			</div>
 		</div>
-		<div class="fs3-comment-like flex items-center justify-between mt-3">
-			<a href="'. get_permalink().'" class="fs3-comments flex items-center gap-3 text-8a font-normal font-proxima text-sm hover:text-orange-400">
-				<img src="'.get_site_url().'/wp-content/themes/tailpress/images/chat.png" alt="" width="15" height="15"> 
-				('.$post->comment_count.') comments
+		<div class="d-flex fs3-comment-like flex items-center justify-between mt-3">
+			<a href="'. get_permalink().'" class="d-flex fs3-comments flex items-center gap-3 text-8a font-normal font-proxima text-sm hover:text-orange-400">
+				<img src="'.get_site_url().'/wp-content/themes/tailpress/images/chat.png" alt="" width="10px" height="10px" class="image-small"> 
+				<span class="font-small">('.$post->comment_count.') comments</span>
 			</a>
 			'.do_shortcode('[posts_like_dislike]').'
 		</div>
@@ -538,14 +539,14 @@ function navigation_lessons(){
 	if ( $the_query->have_posts() ) {
 	while ( $the_query->have_posts() ) { 
 		$the_query->the_post();
-		$lessons .= '<a href="'.get_permalink().'" class="plbb-block" target="_blank">
-				<div class="plbb-block-left">
+		$lessons .= '<a href="'.get_permalink().'" class="plbb-block d-flex block-shadow" target="_blank">
+				<div class="plbb-block-left bg-image-yellow">
 					<img src="'.get_the_post_thumbnail_url().'" alt="">
 				</div>        
-				<div class="plbb-block-right">
-					<h3>'.get_the_title().'</h3>
-					<span>'.get_the_date('d/m/Y').'</span>
-					<p>'.get_the_excerpt().'</p>
+				<div class="plbb-block-right text-block">
+					<h3 class="heading-3">'.get_the_title().'</h3>
+					<span class="font-small">'.get_the_date('d/m/Y').'</span>
+					<p class="paragraph">'.get_the_excerpt().'</p>
 				</div>        
 			</a>';							 
 	}
@@ -567,9 +568,9 @@ function navigation_inspiratie(){
 	if ( $the_query->have_posts() ) {
 	while ( $the_query->have_posts() ) { 
 		$the_query->the_post();
-		$Inspiratie .= '<a href="'.get_permalink().'" class="plbb-block" target="_blank">      
-				<div class="plbb-block-right" style="background: url('.get_the_post_thumbnail_url().'); background-size: cover;">
-					<h3>'.get_the_title().'</h3>
+		$Inspiratie .= '<a href="'.get_permalink().'" class="plbb-block image-last-block__wrapper" target="_blank">      
+				<div class="plbb-block-right overlay image-last-block__img" style="background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('.get_the_post_thumbnail_url().'); background-size: cover; padding: 20px; margin-bottom:20px !important; border-radius: 10px">
+					<h3 style="color: #fff">'.get_the_title().'</h3>
 				</div>        
 			</a>';							 
 	}

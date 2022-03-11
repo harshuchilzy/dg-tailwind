@@ -78,6 +78,7 @@ get_header(); ?>
                                <div class="fs3-comment-like flex items-center justify-between mt-3">
                                     <a href="<?php echo get_permalink(); ?>" class="fs3-comments flex items-center gap-3 text-8a font-normal font-proxima text-sm hover:text-orange-400"><img src="<?php echo get_site_url(); ?>/wp-content/themes/tailpress/images/chat.png" alt="" width="15" height="15"> (<?php echo $post->comment_count; ?>) comments</a>
 								   <?php echo do_shortcode('[posts_like_dislike]');?>
+
                                </div>
 
                             </div>

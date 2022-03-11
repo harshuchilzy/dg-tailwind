@@ -5,7 +5,13 @@
 </div>
 
 <?php do_action( 'tailpress_content_after' ); ?>
-
+<div class="mobile__filter_show text-right">
+	<div class="button__to_show">
+		<button class="click_to_open">
+			<span class="dashicons dashicons-plus-alt"></span>
+		</button>
+	</div>
+</div>
 <div class="footer-section bg-black">
 	<div class="container mx-auto">
 		<div class="footer-top">
@@ -106,6 +112,8 @@
 		left: -57px;
 	}
 </style>
+
+
 <?php wp_footer(); ?>
 <script>
 	$(document).ready(function(){
@@ -148,6 +156,20 @@
 				}
 			});
 		});
+		
+	 if( $(".product-left-bottom-block a").length > 2 ){
+	  			$(".product-left-bottom-block").slick({
+							slidesToShow: 2,
+							slidesToScroll: 2,
+							dots: true,
+							arrows: true,
+						});   
+	     
+	 }
+	 $("body").on("click", ".mega-menu-link", function(){
+	     console.log('here');
+	     
+	 });
 	});
 </script>
 <script>
@@ -162,6 +184,7 @@ function myFunction() {
   }
 }
 	
+	// 	Post Comments Selections
 	var sel = $('.select---box'),
 		txt = $('.div_box'),
 		options = $('.options');
@@ -178,10 +201,17 @@ function myFunction() {
 		$(this).addClass('selected').siblings('div').removeClass('selected');
 		options.hide();
 	});
+	// 	Cart Page New Arrivals
 	$(window).on('load', function(){
 		var html = $('.copy_this_shortcode').html();
 		$('.paste_shortcode').html(html);
+		
+		$('.mega-menu__title').parents('.mega-sub-menu').addClass('overflow__handler');
 	});
+	// 	Mobile Filter Show
+		$(document).on('click', '.click_to_open', function(){
+			$('body').addClass('filter_visible');
+		})
 	
 </script>
 <script>

@@ -343,33 +343,48 @@ function delivery_eta($product_id = '')
 	);
 	$eta_hours = $delivery_hours[$delivery_sort_order][$current_day . '_' . $day_half];
     
+    $datetime_format = get_option('date_format') . ' ' . get_option('time_format');
     $holidays = get_option('dg_holidays');
 
-	$raw_delivery = date(get_option('date_format') . ' ' . get_option('time_format'), strtotime('+' . $eta_hours . ' hours'));
+	$raw_delivery = date($datetime_format, strtotime('+' . $eta_hours . ' hours'));
 
-    echo $raw_delivery;
-    // print_r(getDatesFromRange(current_time('Y-m-d'), date($raw_delivery, strtotime('-1day'))));
+    // echo $raw_delivery;
+    $holidays = json_decode($holidays);
+    $end = date('Y-m-d h:i a', strtotime( '-1day', strtotime($raw_delivery)));
+    $days_between = getDatesFromRange(current_time('Y-m-d'), $end);
+
+    $result = array_intersect($holidays, $days_between);
+    $holiday_hours = count($result) * 24;
+    
+	$delivery_date = date($datetime_format, strtotime('+' . $holiday_hours + $eta_hours . ' hours'));
+    // echo '<p class="black-24 font-normal text-base font-proxima flex items-center gap-4"><span>Delivery ETA:</span>' . $delivery_date . '</p>';
+    echo $delivery_date;
 }
 
 function getDatesFromRange($start, $end, $format = 'Y-m-d') {
-      
-    // Declare an empty array
     $array = array();
-      
-    // Variable that store the date interval
-    // of period 1 day
     $interval = new DateInterval('P1D');
-  
     $realEnd = new DateTime($end);
     $realEnd->add($interval);
-  
     $period = new DatePeriod(new DateTime($start), $interval, $realEnd);
-  
-    // Use loop to store date into array
     foreach($period as $date) {                 
         $array[] = $date->format($format); 
     }
-  
-    // Return the array elements
     return $array;
+}
+
+add_action('delivery_eta_notice', 'delivery_eta');
+
+add_action( 'woocommerce_checkout_create_order_line_item', 'eta_checkout_create_order_line_item', 20, 4 );
+function eta_checkout_create_order_line_item( $item, $cart_item_key, $values, $order ) {
+    // Get a product custom field value
+    $delivery_sort_order = get_post_meta( $item->get_product_id(), 'delivery_sort_order_if_stock', true );
+    // Update order item meta
+    if ( !empty( $delivery_sort_order ) ){
+        $item->update_meta_data( 'delivery_eta', delivery_eta($item->get_product_id()) );
+    }
+    // // Get cart item custom data and update order item meta
+    // if( isset( $values['custom_data'] ) ) {
+    //     $item->update_meta_data( 'meta_key2', $values['custom_data'] );
+    // }
 }

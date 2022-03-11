@@ -11,7 +11,7 @@ jQuery(document).ready( function ($) {
             }); 
             var downloading_ids = [];
             table.rows({page:'current'}).data().map((row) => {
-              downloading_ids.push(row[1]);
+              downloading_ids.push(row[0]);
               console.log(downloading_ids);
             });
             jQuery.ajax({
