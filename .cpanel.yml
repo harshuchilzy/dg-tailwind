@@ -1,5 +1,0 @@
----
-deployment:
-  tasks:
-    - export DEPLOYPATH=/home/eancodewebshop/public_html/staging/wp-content/themes/tailpress
-    - /bin/cp * $DEPLOYPATH
